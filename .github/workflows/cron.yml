@@ -1,14 +1,17 @@
-name: HTTP Cron Trigger
+name: HTTP Cron Tetikleyicisi
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: "*/1 * * * *"
+    - cron: "* * * * *"   # her dakika (UTC)
+  workflow_dispatch:
 
 jobs:
   trigger:
     runs-on: ubuntu-latest
+    timeout-minutes: 1
     steps:
-      - name: Call cron.php
+      - name: Trigger remote cron
         run: |
-          curl -A "GitHub-Actions-Cron" -L https://salonazizcan.hedefbilgitoplumu.com/cron.php
+          curl --fail --silent --show-error \
+          -A "GITHUB-SCHEDULE-CRON" \
+          https://salonazizcan.hedefbilgitoplumu.com/cron.php
