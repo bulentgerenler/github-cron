@@ -1,6 +1,7 @@
 name: HTTP Cron Trigger
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "*/1 * * * *"
 
@@ -8,6 +9,6 @@ jobs:
   trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Call URL
+      - name: Call cron.php
         run: |
-          curl -L -s https://salonazizcan.hedefbilgitoplumu.com/cron.php > /dev/null
+          curl -A "GitHub-Actions-Cron" -L https://salonazizcan.hedefbilgitoplumu.com/cron.php
