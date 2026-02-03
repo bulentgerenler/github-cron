@@ -1,0 +1,13 @@
+name: HTTP Cron Trigger
+
+on:
+  schedule:
+    - cron: "*/1 * * * *"
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call URL
+        run: |
+          curl -L -s https://salonazizcan.hedefbilgitoplumu.com/cron.php > /dev/null
